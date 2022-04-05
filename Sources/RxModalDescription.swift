@@ -5,7 +5,7 @@
 //  Created by Jérôme Alves on 06/02/2021.
 //
 
-import UIKit
+import Foundation
 
 public protocol RxModalCustomStringConvertible {
     var rxModalDescription: String { get }
@@ -20,60 +20,3 @@ extension String {
         }
     }
 }
-
-#if canImport(MessageUI)
-import MessageUI
-extension MFMailComposeResult: RxModalCustomStringConvertible {
-    public var rxModalDescription: String {
-        switch self {
-        case .cancelled:
-            return "cancelled"
-        case .saved:
-            return "saved"
-        case .sent:
-            return "sent"
-        case .failed:
-            return "failed"
-        @unknown default:
-            return "@unknown"
-        }
-    }
-}
-
-extension MessageComposeResult: RxModalCustomStringConvertible {
-    public var rxModalDescription: String {
-        switch self {
-        case .cancelled:
-            return "cancelled"
-        case .sent:
-            return "sent"
-        case .failed:
-            return "failed"
-        @unknown default:
-            return "@unknown"
-        }
-    }
-}
-#endif
-
-#if canImport(MediaPlayer)
-import MediaPlayer
-@available(iOS 9.3, *)
-extension MPMediaLibraryAuthorizationStatus: RxModalCustomStringConvertible {
-    public var rxModalDescription: String {
-        switch self {
-        case .notDetermined:
-            return "notDetermined"
-        case .denied:
-            return "denied"
-        case .restricted:
-            return "restricted"
-        case .authorized:
-            return "authorized"
-        @unknown default:
-            return "@unknown"
-        }
-    }
-}
-
-#endif
